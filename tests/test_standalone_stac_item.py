@@ -1,14 +1,14 @@
 import json
-import pytest
-import requests
 import os
 import tempfile
 from urllib.parse import quote
 
+import pytest
+import requests
 import xncml
 
 from STACpopulator.extensions.cmip6 import CMIP6Helper
-from STACpopulator.extensions.thredds import THREDDSHelper, THREDDSExtension
+from STACpopulator.extensions.thredds import THREDDSExtension, THREDDSHelper
 from STACpopulator.implementations.CMIP6_UofT.add_CMIP6 import CMIP6populator
 from STACpopulator.input import THREDDSLoader
 from STACpopulator.models import GeoJSONPolygon
@@ -64,7 +64,7 @@ class MockedNoSTACUpload(CMIP6populator):
             "keywords": ["test"],
             "license": "MIT",
             "spatialextent": [-180, -90, 180, 90],
-            "temporalextent": ['1850-01-01', None]
+            "temporalextent": ["1850-01-01", None],
         }
 
     def validate_host(self, stac_host: str) -> str:
@@ -79,7 +79,7 @@ def test_cmip6_stac_thredds_catalog_parsing():
     url = "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/catalog/birdhouse/testdata/xclim/cmip6/catalog.html"
     loader = THREDDSLoader(url)
     with tempfile.NamedTemporaryFile():
-        populator = MockedNoSTACUpload("https://host-dont-care.com", loader)
+        populator = MockedNoSTACUpload("https://host-dont-care.com", loader, url)
 
     result = populator.create_stac_collection()
 

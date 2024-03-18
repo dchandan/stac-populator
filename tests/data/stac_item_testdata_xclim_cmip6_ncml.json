@@ -74,7 +74,7 @@
       "rel": "source",
       "href": "https://pavics.ouranos.ca/twitcher/ows/proxy/thredds/fileServer/birdhouse/testdata/xclim/cmip6/sic_SImon_CCCma-CanESM5_ssp245_r13i1p2f1_2020.nc",
       "type": "application/x-netcdf",
-      "title": "birdhouse/testdata/xclim/cmip6/sic_SImon_CCCma-CanESM5_ssp245_r13i1p2f1_2020.nc"
+      "title": "cmip6/sic_SImon_CCCma-CanESM5_ssp245_r13i1p2f1_2020.nc"
     }
   ],
   "assets": {
@@ -121,6 +121,6 @@
     89.74176788330078
   ],
   "stac_extensions": [
-    "https://raw.githubusercontent.com/dchandan/stac-extension-cmip6/main/json-schema/schema.json"
+    "https://raw.githubusercontent.com/dchandan/stac-extension-cmip6/v1.0.0/json-schema/schema.json"
   ]
 }
