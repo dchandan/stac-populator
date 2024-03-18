@@ -3,7 +3,9 @@ import json
 import logging
 import os
 from typing import Any, MutableMapping, NoReturn, Optional, Union
+from urllib.parse import urlparse
 
+from marble_client import MarbleClient
 from pystac import STACValidationError
 from pystac.extensions.datacube import DatacubeExtension
 from requests.sessions import Session
@@ -27,10 +29,12 @@ class CMIP6populator(STACpopulatorBase):
         self,
         stac_host: str,
         data_loader: GenericLoader,
+        catalog_url: str,
         update: Optional[bool] = False,
         session: Optional[Session] = None,
         config_file: Optional[Union[os.PathLike[str], str]] = None,
         log_debug: Optional[bool] = False,
+        add_magpie_item_links: Optional[bool] = False,
     ) -> None:
         """Constructor
 
@@ -41,6 +45,21 @@ class CMIP6populator(STACpopulatorBase):
         super().__init__(
             stac_host, data_loader, update=update, session=session, config_file=config_file, log_debug=log_debug
         )
+        self.add_magpie_item_links = add_magpie_item_links
+        self._catalog_url = catalog_url
+        self._marble_host_node = self.__get_marble_host_node_for_data()
+
+    def __get_marble_host_node_for_data(self):
+        name = None
+        client = MarbleClient()
+        hostname = urlparse(self._catalog_url).hostname
+        for node_name, node in client.nodes.items():
+            if hostname in node.url:
+                name = node_name
+
+        if name == None:
+            raise RuntimeError("Could not infer name of the host that contains the data")
+        return name
 
     def create_stac_item(
         self, item_name: str, item_data: MutableMapping[str, Any]
@@ -72,16 +91,23 @@ class CMIP6populator(STACpopulatorBase):
         try:
             thredds_helper = THREDDSHelper(item_data["access_urls"])
             thredds_ext = THREDDSExtension.ext(item)
-            thredds_ext.apply(thredds_helper.services, thredds_helper.links)
+            thredds_links = thredds_helper.links if self.add_magpie_item_links else []
+            thredds_ext.apply(thredds_helper.services, thredds_links)
         except Exception as e:
             raise Exception("Failed to add THREDDS extension") from e
+
+        # Add Marble network extension
+        item.properties["marble:host_node"] = self._marble_host_node
+        item.properties["marble:is_local"] = True
+        item.stac_extensions.append(
+            "https://raw.githubusercontent.com/DACCS-Climate/marble-stac-extension/v1.0.0/json-schema/schema.json"
+        )
 
         try:
             item.validate()
         except STACValidationError:
             raise Exception("Failed to validate STAC item") from e
 
-        # print(json.dumps(item.to_dict()))
         return json.loads(json.dumps(item.to_dict()))
 
 
@@ -104,6 +130,7 @@ def make_parser() -> argparse.ArgumentParser:
             "By default, uses the adjacent configuration to the implementation class."
         ),
     )
+    parser.add_argument("--add-magpie-item-links", action="store_true")
     add_request_options(parser)
     return parser
 
@@ -120,7 +147,14 @@ def runner(ns: argparse.Namespace) -> Optional[int] | NoReturn:
             data_loader = ErrorLoader()
 
         c = CMIP6populator(
-            ns.stac_host, data_loader, update=ns.update, session=session, config_file=ns.config, log_debug=ns.debug
+            ns.stac_host,
+            data_loader,
+            ns.href,
+            update=ns.update,
+            session=session,
+            config_file=ns.config,
+            log_debug=ns.debug,
+            add_magpie_item_links=ns.add_magpie_item_links,
         )
         c.ingest()
 
