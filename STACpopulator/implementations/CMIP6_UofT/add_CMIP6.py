@@ -31,6 +31,7 @@ class CMIP6populator(STACpopulatorBase):
         session: Optional[Session] = None,
         config_file: Optional[Union[os.PathLike[str], str]] = None,
         log_debug: Optional[bool] = False,
+        add_magpie_item_links: Optional[bool] = False,
     ) -> None:
         """Constructor
 
@@ -41,6 +42,7 @@ class CMIP6populator(STACpopulatorBase):
         super().__init__(
             stac_host, data_loader, update=update, session=session, config_file=config_file, log_debug=log_debug
         )
+        self.add_magpie_item_links = add_magpie_item_links
 
     def create_stac_item(
         self, item_name: str, item_data: MutableMapping[str, Any]
@@ -72,7 +74,8 @@ class CMIP6populator(STACpopulatorBase):
         try:
             thredds_helper = THREDDSHelper(item_data["access_urls"])
             thredds_ext = THREDDSExtension.ext(item)
-            thredds_ext.apply(thredds_helper.services, thredds_helper.links)
+            thredds_links = thredds_helper.links if self.add_magpie_item_links else []
+            thredds_ext.apply(thredds_helper.services, thredds_links)
         except Exception as e:
             raise Exception("Failed to add THREDDS extension") from e
 
@@ -104,6 +107,7 @@ def make_parser() -> argparse.ArgumentParser:
             "By default, uses the adjacent configuration to the implementation class."
         ),
     )
+    parser.add_argument("--add-magpie-item-links", action="store_true")
     add_request_options(parser)
     return parser
 
@@ -120,7 +124,13 @@ def runner(ns: argparse.Namespace) -> Optional[int] | NoReturn:
             data_loader = ErrorLoader()
 
         c = CMIP6populator(
-            ns.stac_host, data_loader, update=ns.update, session=session, config_file=ns.config, log_debug=ns.debug
+            ns.stac_host,
+            data_loader,
+            update=ns.update,
+            session=session,
+            config_file=ns.config,
+            log_debug=ns.debug,
+            add_magpie_item_links=ns.add_magpie_item_links,
         )
         c.ingest()
 
