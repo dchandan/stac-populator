@@ -137,7 +137,7 @@ def magpie_resource_link(url: str) -> pystac.Link:
     title = url_[i + 2 :]
     # The title can become very long with creates problem with size of this filed in pgstac.
     # Therefore reducing the size of title to only include the version and the filename
-    title = "/".join(title.strip().split("/")[10:])
+    title = "/".join(title.strip().split("/")[-2:])
     link = pystac.Link(rel="source", title=title, target=url, media_type="application/x-netcdf")
     return link
 
