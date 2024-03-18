@@ -131,6 +131,7 @@ dependencies = [
   "lxml",
   "jsonschema",
   "marble-client",
+  "responses",
 ]
 description = "Utility to populate STAC Catalog, Collections and Items from various dataset/catalog sources."
 keywords = [
