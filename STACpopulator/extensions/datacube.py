@@ -1,5 +1,5 @@
 import functools
-from typing import Any, MutableMapping, MutableSequence
+from typing import Any, MutableMapping, MutableSequence, Optional
 
 from pystac.extensions.datacube import Dimension, DimensionType, Variable, VariableType
 
@@ -11,7 +11,9 @@ class DataCubeHelper:
 
     axis = {"X": "x", "Y": "y", "Z": "z", "T": None, "longitude": "x", "latitude": "y", "vertical": "z", "time": "t"}
 
-    def __init__(self, attrs: MutableMapping[str, Any]):
+    def __init__(
+        self, attrs: MutableMapping[str, Any], start_datetime: Optional[str] = None, end_datetime: Optional[str] = None
+    ):
         """
         Create STAC Item from CF JSON metadata.
 
@@ -19,8 +21,15 @@ class DataCubeHelper:
         ----------
         attrs: dict
             CF JSON metadata returned by `xncml.Dataset.to_cf_dict`.
+        start_datetime: str
+            ISO formatted start datetime, Optional
+        end_datetime: str
+            ISO formatted end datetime, Optional
+
         """
         self.attrs = attrs
+        self.start_datetime = start_datetime
+        self.end_datetime = end_datetime
 
         # From CF-Xarray
         self.coordinate_criteria = {
@@ -230,7 +239,6 @@ class DataCubeHelper:
                 out[attrs["bounds"]] = name
         return out
 
-
     def is_coordinate(self, attrs: MutableMapping[str, Any]) -> bool:
         """Return whether variable is a coordinate.
 
@@ -244,7 +252,14 @@ class DataCubeHelper:
         return False
 
     def temporal_extent(self) -> MutableSequence[str]:
-        cfmeta = self.attrs["groups"]["CFMetadata"]["attributes"]
-        start_datetime = cfmeta["time_coverage_start"]
-        end_datetime = cfmeta["time_coverage_end"]
-        return [start_datetime, end_datetime]
+        # The version of THREDDS server being used does not decipher time ranges correctly.
+        # For this reason, here we are allowing the user to manually set the start and end datetimes
+        # for temporal extent. If these are not set then the code defaults to using the data provided
+        # by the server, which depending on the server, could be completely wrong.
+        if self.start_datetime and self.end_datetime:
+            return [self.start_datetime, self.end_datetime]
+        else:
+            cfmeta = self.attrs["groups"]["CFMetadata"]["attributes"]
+            start_datetime = cfmeta["time_coverage_start"]
+            end_datetime = cfmeta["time_coverage_end"]
+            return [start_datetime, end_datetime]
