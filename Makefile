@@ -35,6 +35,10 @@ del-cmip6:
 	curl --location --request DELETE '$(STAC_HOST)/collections/CMIP6_UofT'
 	@echo ""
 
+del-nex:
+	curl --location --request DELETE '$(STAC_HOST)/collections/NEX-GDDP-CMIP6_UofT'
+	@echo ""
+
 docker-start:
 	docker compose $(DOCKER_COMPOSE_FILES) up
 starthost: docker-start
