@@ -134,7 +134,7 @@ class STACpopulatorBase(ABC):
             ]
         )
         self._collection_info["extent"] = pystac.Extent(sp_extent, tmp_extent)
-        self._collection_info["summaries"] = pystac.Summaries({"needs_summaries_update": ["true"]})
+        self._collection_info["summaries"] = self.__make_collection_summaries()
 
         # Add any assets if provided in the config
         self._collection_info["assets"] = self.__make_collection_assets()
@@ -150,6 +150,14 @@ class STACpopulatorBase(ABC):
         collection_data = collection.to_dict()
         self.publish_stac_collection(collection_data)
         return collection_data
+
+    def __make_collection_summaries(self) -> pystac.Summaries:
+        """Create the collection summaries if provided by the user via the configuration file.
+
+        :return: pystac Summaries object
+        :rtype: pystac.Summaries
+        """
+        return pystac.Summaries(self._collection_info.get("summaries", {"needs_summaries_update": ["true"]}))
 
     def __make_collection_links(self) -> List[pystac.Link]:
         """Create collection level links based on data read in from the configuration file.
