@@ -1,0 +1,26 @@
+title: NEX-GDDP-CMIP6
+id: NEX-GDDP-CMIP6_UofT
+description: The NEX-GDDP-CMIP6 dataset is comprised of global downscaled climate scenarios derived from the General Circulation Model (GCM) runs conducted under the Coupled Model Intercomparison Project Phase 6 (CMIP6) and across all four "Tier 1" greenhouse gas emissions scenarios known as Shared Socioeconomic Pathways (SSPs). The CMIP6 GCM runs were developed in support of the Sixth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC AR6). This dataset includes downscaled projections from ScenarioMIP model runs for which daily scenarios were produced and distributed through the Earth System Grid Federation. The purpose of this dataset is to provide a set of global, high resolution, bias-corrected climate change projections that can be used to evaluate climate change impacts on processes that are sensitive to finer-scale climate gradients and the effects of local topography on climate conditions.\n\nUsers are encouraged to review the [technote](https://www.nccs.nasa.gov/sites/default/files/NEX-GDDP-CMIP6-Tech_Note.pdf) and the [NEX-GDDP-CMIP6 product page](https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6) for more detailed information, references and acknowledgements.
+keywords: ['NASA', 'CMIP6', 'Climate', 'Humidity', 'Temperature', 'Precipitation', 'Radiation', 'Downscaled']
+license: "CC-BY-4.0"
+spatialextent: [-180, -90, 180, 90]
+temporalextent: ['1950-01-01', '2100-01-01']
+
+links:
+    - rel: about
+      title : Project homepage
+      target : https://www.nccs.nasa.gov/services/data-collections/land-based-products/nex-gddp-cmip6
+      media_type: text/html
+
+summaries:
+  nexgddp:experiment_id: ['historical', 'ssp126', 'ssp245', 'ssp370', 'ssp585']
+  nexgddp:frequency: ['day']
+  nexgddp:source_id: ["UKESM1-0-LL", "TaiESM1", "NorESM2-MM", "NorESM2-LM", "NESM3", "MRI-ESM2-0", "MPI-ESM1-2-LR", "MPI-ESM1-2-HR", "MIROC6", "MIROC-ES2L", "KIOST-ESM", "KACE-1-0-G", "IPSL-CM6A-LR", "INM-CM5-0", "INM-CM4-8", "IITM-ESM", "HadGEM3-GC31-MM", "HadGEM3-GC31-LL", "GISS-E2-1-G", "GFDL-ESM4", "GFDL-CM4_gr2", "GFDL-CM4", "FGOALS-g3", "EC-Earth3-Veg-LR", "EC-Earth3", "CanESM5", "CNRM-ESM2-1", "CNRM-CM6-1", "CMCC-ESM2", "CMCC-CM2-SR5", "CESM2-WACCM", "CESM2", "BCC-CSM2-MR", "ACCESS-ESM1-5", "ACCESS-CM2"]
+  nexgddp:Conventions: ["CF-1.7"]
+  nexgddp:cmip_version: ["CMIP6"]
+  nexgddp:institution_id: ["CMCC", "NOAA-GFDL", "KIOST", "CCCma", "MRI", "BCC", "CCCR-IITM", "NUIST", "AS-RCEC", "MIROC", "CSIRO-ARCCSS", "EC-Earth-Consortium", "NCC", "NASA-GISS", "NIMS-KMA", "MPI-M", "CAS", "CNRM-CERFACS", "MOHC", "IPSL", "CSIRO", "NCAR", "INM"]
+  nexgddp:variant_label: ['r3i1p1f1', 'r1i1p1f2', 'r1i1p1f1', 'r4i1p1f1', 'r1i1p1f3']
+  nexgddp:version: ['1.0']
+  nexgddp:license: ['CC-BY-SA 4.0']
+  nexgddp:variable_id: ["hurs", "huss", "pr", "rlds", "rsds", "sfcWind", "tas", "tasmax", "tasmin"]
+  nexgddp:calendar: ["proleptic_gregorian", "365_day", "360_day", "standard"]
