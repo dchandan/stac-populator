@@ -9,10 +9,33 @@ temporalextent: ['1850-01-01', '2500-01-01']
 links:
     - rel: about
       title : Project homepage
-      target : https://wcrp-cmip.org/cmip-phase-6-cmip6/
+      target : https://wcrp-cmip.org/cmip6/
       media_type: text/html
     - rel: license  
       title : License
       target : https://raw.githubusercontent.com/WCRP-CMIP/CMIP6_CVs/main/LICENSE-CC-BY
       media_type: text/plain
 
+summaries:
+  cmip6:grid_label: ['gn', 'gr', 'gr1']
+  cmip6:realm: ['atmos']
+  cmip6:mip_era: ["CMIP6"]
+  cmip6:product: ["model-output"]
+  cmip6:table_id: ["Amon"]
+  cmip6:frequency: ["mon"]
+  cmip6:source_id: ['ACCESS-CM2', 'ACCESS-ESM1-5', 'AWI-CM-1-1-MR', 'AWI-ESM-1-1-LR', 'BCC-CSM2-MR', 'BCC-ESM1', 'CAMS-CSM1-0', 'CAS-ESM2-0', 'CESM2', 'CESM2-FV2', 'CESM2-WACCM', 'CESM2-WACCM-FV2', 'CIESM', 'CMCC-CM2-HR4', 'CMCC-CM2-SR5', 'CMCC-ESM2', 'CNRM-CM6-1', 'CNRM-CM6-1-HR', 'CNRM-ESM2-1', 'CanESM5', 'CanESM5-1', 'CanESM5-CanOE', 'E3SM-1-0', 'E3SM-1-1', 'E3SM-1-1-ECA', 'E3SM-2-0', 'E3SM-2-0-NARRM', 'EC-Earth3', 'EC-Earth3-AerChem', 'EC-Earth3-CC', 'EC-Earth3-Veg', 'EC-Earth3-Veg-LR', 'FGOALS-f3-L', 'FGOALS-g3', 'FIO-ESM-2-0', 'GFDL-ESM4', 'GISS-E2-1-G', 'GISS-E2-1-G-CC', 'GISS-E2-1-H', 'GISS-E2-2-G', 'GISS-E2-2-H', 'HadGEM3-GC31-LL', 'HadGEM3-GC31-MM', 'ICON-ESM-LR', 'INM-CM4-8', 'INM-CM5-0', 'IPSL-CM5A2-INCA', 'IPSL-CM6A-LR', 'IPSL-CM6A-LR-INCA', 'KACE-1-0-G', 'KIOST-ESM', 'MCM-UA-1-0', 'MIROC-ES2H', 'MIROC-ES2L', 'MIROC6', 'MPI-ESM-1-2-HAM', 'MPI-ESM1-2-HR', 'MPI-ESM1-2-LR', 'MRI-ESM2-0', 'NESM3', 'NorCPM1', 'NorESM2-LM', 'NorESM2-MM', 'SAM0-UNICON', 'TaiESM1', 'UKESM1-0-LL', 'UKESM1-1-LL']
+  cmip6:Conventions: ['CF-1.7 CMIP-6.0 UGRID-1.0', 'CF-1.7 CMIP-6.2', 'CF-1.7 CMIP-6.2 ']
+  cmip6:activity_id: ["CMIP", "ScenarioMIP"]
+  cmip6:source_type: ['AER AOGCM CHEM', 'AGCM', 'AGCM BGC CHEM AER', 'AOGCM', 'AOGCM AER', 'AOGCM AER BGC', 'AOGCM AER BGC CHEM', 'AOGCM AER CHEM', 'AOGCM AER CHEM BGC', 'AOGCM BGC', 'AOGCM BGC AER', 'AOGCM BGC AER CHEM', 'AOGCM BGC CHEM AER']
+  cmip6:variable_id: ['clt', 'hfss', 'hurs', 'huss', 'pr', 'prc', 'prsn', 'ps', 'psl', 'tas', 'tasmax', 'tasmin', 'ts']
+  cmip6:experiment_id: ["historical", "ssp245", "ssp370", "ssp585"]
+  cmip6:forcing_index: [1, 2, 3]
+  cmip6:physics_index: [1, 2, 3, 4, 5]
+  cmip6:variant_label: [r1i1p1f1, r1i1p1f2, r1i1p1f3, r1i1p2f1, r1i1p3f1, r1i1p4f1, r1i1p4f2, r1i1p5f1, r1i2p1f1, r1i2p2f1, r1i3p1f1, r1i1000p1f1, r1i1000p1f2, r1i2000p1f1, r2i1p1f1, r2i1p1f2, r2i1p1f3, r2i1p2f1, r2i1p3f1, r2i1p4f2, r2i1p5f1, r2i2p2f1, r2i3p1f1, r3i1p1f1, r3i1p1f2, r3i1p1f3, r3i1p2f1, r3i1p3f1, r3i1p4f2, r3i1p5f1, r3i2p2f1, r3i3p1f1, r4i1p1f1, r4i1p1f2, r4i1p1f3, r4i1p2f1, r4i1p3f1, r4i1p5f1, r4i2p2f1, r4i3p1f1, r5i1p1f1, r5i1p1f2, r5i1p1f3, r5i1p2f1, r5i1p3f1, r5i1p5f1, r5i2p2f1, r5i3p1f1, r6i1p1f1, r6i1p1f2, r6i1p1f3, r6i1p2f1, r6i1p3f1, r6i1p5f1, r6i2p2f1, r7i1p1f1, r7i1p1f2, r7i1p1f3, r7i1p2f1, r7i1p5f1, r7i2p2f1, r8i1p1f1, r8i1p1f2, r8i1p2f1, r8i1p3f1, r8i1p5f1, r8i2p2f1, r9i1p1f1, r9i1p1f2, r9i1p2f1, r9i1p3f1, r9i1p5f1, r9i2p2f1, r10i1p1f1, r10i1p1f2, r10i1p2f1, r10i1p3f1, r10i1p5f1, r10i2p2f1, r11i1p1f1, r11i1p1f2, r11i1p1f3, r11i1p2f1, r11i2p2f1, r12i1p1f1, r12i1p1f2, r12i1p1f3, r12i1p2f1, r12i2p2f1, r13i1p1f1, r13i1p1f2, r13i1p1f3, r13i1p2f1, r13i2p2f1, r14i1p1f1, r14i1p1f2, r14i1p1f3, r14i1p2f1, r14i2p2f1, r15i1p1f1, r15i1p1f2, r15i1p1f3, r15i1p2f1, r15i2p2f1, r16i1p1f1, r16i1p1f2, r16i1p1f3, r16i1p2f1, r16i2p2f1, r17i1p1f1, r17i1p1f2, r17i1p1f3, r17i1p2f1, r17i2p2f1, r18i1p1f1, r18i1p1f2, r18i1p1f3, r18i1p2f1, r18i2p2f1, r19i1p1f1, r19i1p1f2, r19i1p1f3, r19i1p2f1, r19i2p2f1, r20i1p1f1, r20i1p1f2, r20i1p1f3, r20i1p2f1, r20i2p2f1, r21i1p1f1, r21i1p1f2, r21i1p1f3, r21i1p2f1, r22i1p1f1, r22i1p1f2, r22i1p1f3, r22i1p2f1, r23i1p1f1, r23i1p1f2, r23i1p1f3, r23i1p2f1, r24i1p1f1, r24i1p1f2, r24i1p1f3, r24i1p2f1, r25i1p1f1, r25i1p1f2, r25i1p1f3, r25i1p2f1, r26i1p1f1, r26i1p1f2, r26i1p1f3, r26i1p2f1, r27i1p1f1, r27i1p1f2, r27i1p1f3, r27i1p2f1, r28i1p1f1, r28i1p1f2, r28i1p1f3, r28i1p2f1, r29i1p1f1, r29i1p1f2, r29i1p1f3, r29i1p2f1, r30i1p1f1, r30i1p1f2, r30i1p1f3, r30i1p2f1, r31i1p1f1, r31i1p1f3, r31i1p2f1, r32i1p1f1, r32i1p1f3, r32i1p2f1, r33i1p1f1, r33i1p1f3, r33i1p2f1, r34i1p1f1, r34i1p1f3, r34i1p2f1, r35i1p1f1, r35i1p1f3, r35i1p2f1, r36i1p1f1, r36i1p1f3, r36i1p2f1, r37i1p1f1, r37i1p1f3, r37i1p2f1, r38i1p1f1, r38i1p1f3, r38i1p2f1, r39i1p1f1, r39i1p1f3, r39i1p2f1, r40i1p1f1, r40i1p1f3, r40i1p2f1, r41i1p1f1, r41i1p1f3, r42i1p1f1, r42i1p1f3, r43i1p1f1, r43i1p1f3, r44i1p1f1, r44i1p1f3, r45i1p1f1, r45i1p1f3, r46i1p1f1, r46i1p1f3, r47i1p1f1, r47i1p1f3, r48i1p1f1, r48i1p1f3, r49i1p1f1, r49i1p1f3, r50i1p1f1, r50i1p1f3, r51i1p1f3, r52i1p1f3, r53i1p1f3, r54i1p1f3, r55i1p1f3, r56i1p1f3, r57i1p1f3, r58i1p1f3, r59i1p1f3, r60i1p1f3, r101i1p1f1, r102i1p1f1, r103i1p1f1, r104i1p1f1, r105i1p1f1, r106i1p1f1, r107i1p1f1, r108i1p1f1, r109i1p1f1, r110i1p1f1, r111i1p1f1, r112i1p1f1, r113i1p1f1, r114i1p1f1, r115i1p1f1, r116i1p1f1, r117i1p1f1, r118i1p1f1, r119i1p1f1, r120i1p1f1, r121i1p1f1, r122i1p1f1, r123i1p1f1, r124i1p1f1, r125i1p1f1, r126i1p1f1, r127i1p1f1, r128i1p1f1, r129i1p1f1, r130i1p1f1, r131i1p1f1, r132i1p1f1, r133i1p1f1, r134i1p1f1, r135i1p1f1, r136i1p1f1, r137i1p1f1, r138i1p1f1, r139i1p1f1, r140i1p1f1, r141i1p1f1, r142i1p1f1, r143i1p1f1, r144i1p1f1, r145i1p1f1, r146i1p1f1, r147i1p1f1, r148i1p1f1, r149i1p1f1, r150i1p1f1]
+  cmip6:institution_id: ['AS-RCEC', 'AWI', 'BCC', 'CAMS', 'CAS', 'CCCma', 'CMCC', 'CNRM-CERFACS', 'CSIRO', 'CSIRO-ARCCSS', 'DKRZ', 'E3SM-Project', 'EC-Earth-Consortium', 'FIO-QLNM', 'HAMMOZ-Consortium', 'INM', 'IPSL', 'KIOST', 'MIROC', 'MOHC', 'MPI-M', 'MRI', 'NASA-GISS', 'NCAR', 'NCC', 'NIMS-KMA', 'NOAA-GFDL', 'NUIST', 'SNU', 'THU', 'UA', 'UCSB']
+  cmip6:sub_experiment: ["none"]
+  cmip6:realization_index: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150]
+  cmip6:sub_experiment_id: ["none"]
+  cmip6:data_specs_version: ['01.00.21', '01.00.23', '01.00.27', '01.00.28', '01.00.29', '01.00.30', '01.00.31', '01.00.32', '01.00.33']
+  cmip6:nominal_resolution: ['100 km', '10000 km', '250 km', '50 km', '500 km']
+  cmip6:initialization_index: [1, 2, 3, 1000, 2000]
