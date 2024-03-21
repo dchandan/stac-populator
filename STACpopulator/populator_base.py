@@ -193,7 +193,7 @@ class STACpopulatorBase(ABC):
         for item_name, item_loc, item_data in self._ingest_pipeline:
             LOGGER.info(f"New data item: {item_name}", extra={"item_loc": item_loc})
             try:
-                stac_item = self.create_stac_item(item_name, item_data)
+                stac_item = self.create_stac_item(item_name, item_data, item_loc=item_loc)
             except Exception:
                 LOGGER.exception(
                     f"Failed to create STAC item for {item_name}",

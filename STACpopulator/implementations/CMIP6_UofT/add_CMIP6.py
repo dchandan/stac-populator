@@ -62,7 +62,7 @@ class CMIP6populator(STACpopulatorBase):
         return name
 
     def create_stac_item(
-        self, item_name: str, item_data: MutableMapping[str, Any]
+        self, item_name: str, item_data: MutableMapping[str, Any], item_loc: str
     ) -> Union[None, MutableMapping[str, Any]]:
         """Creates the STAC item.
 
@@ -75,7 +75,14 @@ class CMIP6populator(STACpopulatorBase):
         """
         # Add CMIP6 extension
         try:
-            cmip_helper = CMIP6Helper(item_data, self.item_geometry_model)
+            # The "data version" of CMIP6 data is not included as a metadata in the netCDF file itself.
+            # However, the version is used in the Data Reference Syntax system used to hierarchically organize the data
+            # and can be therefore extracted from the full path to the data file. Here, I am extracting that information
+            # and including it in the attributes that are generated and returned by the THREDDS server. This way, the
+            # version information can be easily passed to the Pydantic data model for the CMIP6 data, used within the
+            # CMIP6Helper class.
+            item_data["attributes"]["version"] = item_loc.strip().split("/")[-2]
+
             item = cmip_helper.stac_item()
         except Exception as e:
             raise Exception("Failed to add CMIP6 extension") from e
