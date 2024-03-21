@@ -101,7 +101,7 @@ class STACpopulatorBase(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def create_stac_item(self, item_name: str, item_data: dict[str, Any]) -> dict[str, Any]:
+    def create_stac_item(self, item_name: str, item_data: dict[str, Any], **kwargs) -> dict[str, Any]:
         raise NotImplementedError
 
     def validate_host(self, stac_host: str) -> str:
