@@ -2,9 +2,11 @@ import argparse
 import json
 import logging
 import os
-from typing import Any, MutableMapping, NoReturn, Optional, Union
+from typing import Any, MutableMapping, NoReturn, Optional, Tuple, Union
 from urllib.parse import urlparse
 
+import cftime
+import netCDF4 as nc
 from marble_client import MarbleClient
 from pystac import STACValidationError
 from pystac.extensions.datacube import DatacubeExtension
@@ -61,6 +63,21 @@ class CMIP6populator(STACpopulatorBase):
             raise RuntimeError("Could not infer name of the host that contains the data")
         return name
 
+    def get_item_temporal_information(self, item_opendap_url: str) -> Tuple[str, str, str]:
+        """Get the temporal extents (start and end date) by opening the file via its OpenDAP URL.
+
+        :param item_name: the file's OpenDAP URL
+        :type item_name: str
+        :return: A tuple of start and end datetimes encoded as strings and the time calendar
+        :rtype: Tuple[str, str, str]
+        """
+        ncf = nc.Dataset(item_opendap_url, "r")
+        calendar = ncf["time"].calendar
+        units = ncf["time"].units
+        st = cftime.num2date(ncf["time"][0], units, calendar).isoformat() + "Z"
+        ed = cftime.num2date(ncf["time"][-1], units, calendar).isoformat() + "Z"
+        return st, ed, calendar
+
     def create_stac_item(
         self, item_name: str, item_data: MutableMapping[str, Any], item_loc: str
     ) -> Union[None, MutableMapping[str, Any]]:
@@ -83,6 +100,10 @@ class CMIP6populator(STACpopulatorBase):
             # CMIP6Helper class.
             item_data["attributes"]["version"] = item_loc.strip().split("/")[-2]
 
+            # Get the item's start and end date from the item name
+            st, ed, _ = self.get_item_temporal_information(item_data["access_urls"]["OPENDAP"])
+
+            cmip_helper = CMIP6Helper(item_data, self.item_geometry_model, st, ed)
             item = cmip_helper.stac_item()
         except Exception as e:
             raise Exception("Failed to add CMIP6 extension") from e
