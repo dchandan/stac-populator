@@ -101,7 +101,7 @@ class NEXGDDPCMIP6populator(STACpopulatorBase):
         return st, ed, calendar
 
     def create_stac_item(
-        self, item_name: str, item_data: MutableMapping[str, Any]
+        self, item_name: str, item_data: MutableMapping[str, Any], **kwargs
     ) -> Union[None, MutableMapping[str, Any]]:
         """Creates the STAC item.
 

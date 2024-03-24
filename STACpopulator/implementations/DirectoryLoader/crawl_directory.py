@@ -35,7 +35,9 @@ class DirectoryPopulator(STACpopulatorBase):
         self.publish_stac_collection(self._collection_info)
         return self._collection_info
 
-    def create_stac_item(self, item_name: str, item_data: MutableMapping[str, Any]) -> MutableMapping[str, Any]:
+    def create_stac_item(
+        self, item_name: str, item_data: MutableMapping[str, Any], **kwargs
+    ) -> MutableMapping[str, Any]:
         return item_data
 
 
