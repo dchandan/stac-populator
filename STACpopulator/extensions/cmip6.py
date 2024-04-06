@@ -131,11 +131,20 @@ class CMIP6Properties(BaseModel, validate_assignment=True):
 
 
 class CMIP6Helper:
-    def __init__(self, attrs: MutableMapping[str, Any], geometry_model: Type[AnyGeometry]):
+    def __init__(
+        self,
+        attrs: MutableMapping[str, Any],
+        geometry_model: Type[AnyGeometry],
+        start_datetime: Optional[str] = None,
+        end_datetime: Optional[str] = None,
+    ):
         self.attrs = attrs
         self.cmip6_attrs = attrs["attributes"]
         self.cfmeta = attrs["groups"]["CFMetadata"]["attributes"]
         self.geometry_model = geometry_model
+
+        self.start_datetime = start_datetime if start_datetime is not None else self.cfmeta["time_coverage_start"]
+        self.end_datetime = end_datetime if end_datetime is not None else self.cfmeta["time_coverage_end"]
 
     @property
     def uid(self) -> str:
@@ -161,13 +170,13 @@ class CMIP6Helper:
     def bbox(self) -> list[float]:
         return ncattrs_to_bbox(self.attrs)
 
-    @property
-    def start_datetime(self) -> datetime:
-        return self.cfmeta["time_coverage_start"]
+    # @property
+    # def start_datetime(self) -> datetime:
+    #     return self.cfmeta["time_coverage_start"]
 
-    @property
-    def end_datetime(self) -> datetime:
-        return self.cfmeta["time_coverage_end"]
+    # @property
+    # def end_datetime(self) -> datetime:
+    #     return self.cfmeta["time_coverage_end"]
 
     @property
     def properties(self) -> CMIP6Properties:

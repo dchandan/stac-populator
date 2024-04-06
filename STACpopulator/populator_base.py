@@ -101,7 +101,7 @@ class STACpopulatorBase(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def create_stac_item(self, item_name: str, item_data: dict[str, Any]) -> dict[str, Any]:
+    def create_stac_item(self, item_name: str, item_data: dict[str, Any], **kwargs) -> dict[str, Any]:
         raise NotImplementedError
 
     def validate_host(self, stac_host: str) -> str:
@@ -193,7 +193,7 @@ class STACpopulatorBase(ABC):
         for item_name, item_loc, item_data in self._ingest_pipeline:
             LOGGER.info(f"New data item: {item_name}", extra={"item_loc": item_loc})
             try:
-                stac_item = self.create_stac_item(item_name, item_data)
+                stac_item = self.create_stac_item(item_name, item_data, item_loc=item_loc)
             except Exception:
                 LOGGER.exception(
                     f"Failed to create STAC item for {item_name}",

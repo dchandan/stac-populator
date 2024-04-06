@@ -101,7 +101,7 @@ class NEXGDDPCMIP6populator(STACpopulatorBase):
         return st, ed, calendar
 
     def create_stac_item(
-        self, item_name: str, item_data: MutableMapping[str, Any]
+        self, item_name: str, item_data: MutableMapping[str, Any], **kwargs
     ) -> Union[None, MutableMapping[str, Any]]:
         """Creates the STAC item.
 
@@ -132,6 +132,9 @@ class NEXGDDPCMIP6populator(STACpopulatorBase):
             bbox=ncattrs_to_bbox(item_data),
             properties=properties,
             datetime=None,
+        )
+        item.stac_extensions.append(
+            "https://raw.githubusercontent.com/DACCS-Climate/nexgddp-stac-extension/v1.0.0/json-schema/schema.json"
         )
 
         # Add datacube extension
