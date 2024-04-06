@@ -133,6 +133,9 @@ class NEXGDDPCMIP6populator(STACpopulatorBase):
             properties=properties,
             datetime=None,
         )
+        item.stac_extensions.append(
+            "https://raw.githubusercontent.com/DACCS-Climate/nexgddp-stac-extension/v1.0.0/json-schema/schema.json"
+        )
 
         # Add datacube extension
         try:
